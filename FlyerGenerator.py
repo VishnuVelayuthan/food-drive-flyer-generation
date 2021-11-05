@@ -1,8 +1,9 @@
-import xlrd
+import openpyxl
+from pathlib import Path
 
 name_of_sheet = "LAHSTeams.xlsx"
 
-excel_book = xlrd.open_workbook(name_of_sheet)
-excel_sheet = xlrd.open_sheet_by_name("Sheet1")
+excel_book = openpyxl.load_workbook(Path("", name_of_sheet))
+excel_sheet = excel_book.active 
 
-print(excel_sheet.cell(12, 5).value)
+print(excel_sheet["E12"].value)
