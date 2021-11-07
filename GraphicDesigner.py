@@ -52,7 +52,7 @@ def make_flyer(teacher_name, room_name, donation_link):
 
     # saving newly generated flyer
     save_path = Path("flyers", teacher_name +"-"+ room_name +".png")
-    flyer_img(save_path, "PNG")
+    flyer_img.save(save_path, "PNG")
     
 def sub_header_str(teacher_name, room_name): 
     """
@@ -62,7 +62,7 @@ def sub_header_str(teacher_name, room_name):
     @param teacher_name: last name of teacher
     @param room_name: room name of teacher
 
-    @return sub_header string to go under title of flyer
+    @return sub_header string to go under title of flyer 
     """
     sub_header = teacher_name + " - "
     
