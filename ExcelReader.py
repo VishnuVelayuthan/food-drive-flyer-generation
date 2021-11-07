@@ -22,7 +22,8 @@ if __name__ == "__main__":
         room_name = data_arr[0]
         teacher_name = data_arr[1]
         donation_link = data_arr[2]
-        print(data_arr)
+        
+        GraphicDesigner.make_flyer(room_name, teacher_name, donation_link)
 
 
 
