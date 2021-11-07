@@ -46,9 +46,9 @@ def make_flyer(teacher_name, room_number, donation_link):
     flyer_img.paste(qr_img, (515, 1135)) # found through trial and error
 
     # putting link in the bottom blue area
-    don_height_adj = 2475
+    don_height_adj = 1680
     w_don, h_don = flyer_editor.textsize(donation_link, font=Fonts["link"])
-    flyer_editor.text(((W-w_don)/2, (H-w_don+don_height_adj)/2), \
+    flyer_editor.text(((W-w_don)/2, (H-h_don+don_height_adj)/2), \
         donation_link, font=Fonts["link"], fill=(0,0,0))
 
     flyer_img.save("gggggg.png", "PNG")
@@ -73,5 +73,5 @@ def qr_code_generator(donation_link):
 
 #main for debugging and testing
 if __name__ == "__main__":
-    make_flyer("Kai Stout", "Room L", "https://impact.shfb.org/teampham-valentukoni",)
+    make_flyer("Kai StoutKai StoutKai Stout", "Room L", "https://impact.shfb.org/teampham-valentukoni",)
     
