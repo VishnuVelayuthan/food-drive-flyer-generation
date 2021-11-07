@@ -17,7 +17,7 @@ qr = qrcode.QRCode(
     border=4,
 )
 
-def make_flyer(teacher_name, room_name, donation_link):
+def make_flyer(room_name, teacher_name, donation_link):
     """
     creates flyer from template
 
