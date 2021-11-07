@@ -17,12 +17,12 @@ qr = qrcode.QRCode(
     border=4,
 )
 
-def make_flyer(teacher_name, room_number, donation_link):
+def make_flyer(teacher_name, room_name, donation_link):
     """
     creates flyer from template
 
     @param teacher_name: name of teacher
-    @param room_number: room number of teacher
+    @param room_number: room name of teacher
     @param donation_link: link to donation link
 
     @return img object of flyer
@@ -32,9 +32,8 @@ def make_flyer(teacher_name, room_number, donation_link):
     W, H = flyer_img.size
 
     flyer_editor = ImageDraw.Draw(flyer_img)
-
     
-    sub_header = teacher_name + " - " + room_number
+    sub_header = sub_header_str(teacher_name, room_name)
     sub_height_adj = 610 # trial and error
     # trying to get sub-header aligned with image
     w_sub, h_sub = flyer_editor.textsize(sub_header, font=Fonts["sub-header"])
@@ -43,17 +42,27 @@ def make_flyer(teacher_name, room_number, donation_link):
 
     # QR code placement on the image 
     qr_img = qr_code_generator(donation_link)
-    flyer_img.paste(qr_img, (515, 1135)) # found through trial and error
+    flyer_img.paste(qr_img, (515, 1150)) # found through trial and error
 
     # putting link in the bottom blue area
-    don_height_adj = 1680
+    don_height_adj = 1775
     w_don, h_don = flyer_editor.textsize(donation_link, font=Fonts["link"])
     flyer_editor.text(((W-w_don)/2, (H-h_don+don_height_adj)/2), \
         donation_link, font=Fonts["link"], fill=(0,0,0))
 
     flyer_img.save("gggggg.png", "PNG")
     
-
+def sub_header_str(teacher_name, room_name): 
+    sub_header = teacher_name + " - "
+    
+    # in case the room name is not a number like library
+    try: 
+        int(room_name)
+        sub_header += "Room " + room_name
+    except ValueError:
+        sub_header += room_name
+    
+    return sub_header
 
 def qr_code_generator(donation_link):
     """
@@ -73,5 +82,5 @@ def qr_code_generator(donation_link):
 
 #main for debugging and testing
 if __name__ == "__main__":
-    make_flyer("Kai StoutKai StoutKai Stout", "Room L", "https://impact.shfb.org/teampham-valentukoni",)
+    make_flyer("Ms Woolfolk", "library", "https://impact.shfb.org/teampham-valentukoni",)
     
