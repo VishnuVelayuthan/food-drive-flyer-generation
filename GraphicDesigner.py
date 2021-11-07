@@ -21,7 +21,7 @@ def make_flyer(teacher_name, room_name, donation_link):
     """
     creates flyer from template
 
-    @param teacher_name: name of teacher
+    @param teacher_name: last name of teacher
     @param room_number: room name of teacher
     @param donation_link: link to donation link
 
@@ -50,9 +50,20 @@ def make_flyer(teacher_name, room_name, donation_link):
     flyer_editor.text(((W-w_don)/2, (H-h_don+don_height_adj)/2), \
         donation_link, font=Fonts["link"], fill=(0,0,0))
 
-    flyer_img.save("gggggg.png", "PNG")
+    # saving newly generated flyer
+    save_path = Path("flyers", teacher_name +"-"+ room_name +".png")
+    flyer_img(save_path, "PNG")
     
 def sub_header_str(teacher_name, room_name): 
+    """
+    processing the teacher name and room name variables 
+    to form a sub_header string
+
+    @param teacher_name: last name of teacher
+    @param room_name: room name of teacher
+
+    @return sub_header string to go under title of flyer
+    """
     sub_header = teacher_name + " - "
     
     # in case the room name is not a number like library
