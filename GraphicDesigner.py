@@ -7,7 +7,7 @@ Template_Path = Path("designs", "template.png")
 
 Fonts = {
     "sub-header": ImageFont.truetype("Roboto-Regular.ttf", size=55),
-    "link": ImageFont.truetype("Roboto-Regular.ttf", size=29)
+    "link": ImageFont.truetype("Roboto-Regular.ttf", size=40)
 }
 
 qr = qrcode.QRCode(
@@ -41,8 +41,15 @@ def make_flyer(teacher_name, room_number, donation_link):
     flyer_editor.text(((W-w_sub)/2, (H-h_sub-sub_height_adj)/2), \
         sub_header, font=Fonts["sub-header"])
 
+    # QR code placement on the image 
     qr_img = qr_code_generator(donation_link)
-    flyer_img.paste(qr_img, (515, 1135))
+    flyer_img.paste(qr_img, (515, 1135)) # found through trial and error
+
+    # putting link in the bottom blue area
+    don_height_adj = 2475
+    w_don, h_don = flyer_editor.textsize(donation_link, font=Fonts["link"])
+    flyer_editor.text(((W-w_don)/2, (H-w_don+don_height_adj)/2), \
+        donation_link, font=Fonts["link"], fill=(0,0,0))
 
     flyer_img.save("gggggg.png", "PNG")
     
@@ -50,7 +57,7 @@ def make_flyer(teacher_name, room_number, donation_link):
 
 def qr_code_generator(donation_link):
     """
-    Makes qr code 
+    Makes qr code with correct sizing 
 
     @param donation_link: link to donation link 
 
@@ -58,14 +65,13 @@ def qr_code_generator(donation_link):
     """
     qr_img = qrcode.make(donation_link)
     w_qr, h_qr = qr_img.size
-    
     # trial and error
     qr_img = qr_img.crop((0.1*w_qr, 0.1*h_qr, 0.9*w_qr, 0.9*h_qr))
     qr_img = qr_img.resize((700,700))
-    
+
     return qr_img
 
 #main for debugging and testing
 if __name__ == "__main__":
-    make_flyer("Kai Stout", "Room L", "ggggg",)
+    make_flyer("Kai Stout", "Room L", "https://impact.shfb.org/teampham-valentukoni",)
     
